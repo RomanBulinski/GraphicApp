@@ -38,6 +38,9 @@ MIT
 @angular/router
 MIT
 
+angular-randomcolor
+ISC
+
 rxjs
 Apache-2.0
                                Apache License

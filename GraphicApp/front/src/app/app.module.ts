@@ -10,6 +10,9 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import {SquareComponent} from "./objects/square/square.component";
 import {ElementComponent} from "./objects/element/element.component";
 import { ThirdComponent } from './pages/third/third.component';
+import { FourthComponent } from './pages/fourth/fourth.component';
+import { RandomcolorModule } from 'angular-randomcolor';
+
 
 @NgModule({
   declarations: [
@@ -19,12 +22,14 @@ import { ThirdComponent } from './pages/third/third.component';
     PageNotFoundComponent,
     SquareComponent,
     ElementComponent,
-    ThirdComponent
+    ThirdComponent,
+    FourthComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RandomcolorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

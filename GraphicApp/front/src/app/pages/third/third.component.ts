@@ -51,15 +51,6 @@ export class ThirdComponent implements OnInit {
 
     // save() na poczatku i restore() na koncu
     this.ctx.restore()
-
-
-    // this.ngZone.runOutsideAngular(() => {
-    //   const loop = () => {
-    //     requestAnimationFrame(loop);
-    //   };
-    //   requestAnimationFrame(loop);
-    // });
-
   }
 
 

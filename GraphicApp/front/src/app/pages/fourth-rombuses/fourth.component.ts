@@ -36,14 +36,14 @@ export class FourthComponent implements OnInit {
 
     // this.drawTriangle(this.WIDTH_CANVAS / 2, 200, this.ctx)
 
-    this.drawPlygon(this.ctx,200,5)
+    this.drawPolygon(this.ctx,200,5)
 
     rombus.forEach(o => this.drawSkewRect(this.ctx, o.startX, o.startY, o.w, o.h, o.fill, o.stroke, o.blend));
 
   }
 
 
-  private drawPlygon(ctx: CanvasRenderingContext2D , radius:number, sides:number) {
+  private drawPolygon(ctx: CanvasRenderingContext2D , radius:number, sides:number) {
 
     let slice = (2*Math.PI)/sides
     let angle = 360/sides
@@ -71,7 +71,7 @@ export class FourthComponent implements OnInit {
   private prepareDataRombuses(widthCanvas: number, heightCanvas: number, w: number, h: number): Romb[] {
     let rombus: Romb[] = [];
 
-    for (let n = 0; n < 30; ++n) {
+    for (let n = 0; n < 50; ++n) {
 
       let romb = {
         startX: Utils.randomRange(-100, widthCanvas - this.wRomb / 2),

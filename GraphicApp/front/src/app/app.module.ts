@@ -9,9 +9,10 @@ import { SecondComponent } from './pages/second-house/second.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import {SquareComponent} from "./objects/square/square.component";
 import {ElementComponent} from "./objects/element/element.component";
-import { ThirdComponent } from './pages/third/third.component';
-import { FourthComponent } from './pages/fourth/fourth.component';
+import { ThirdComponent } from './pages/third-rectangle/third.component';
+import { FourthComponent } from './pages/fourth-rombuses/fourth.component';
 import { RandomcolorModule } from 'angular-randomcolor';
+import { FifthComponent } from './pages/fifth/fifth.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { RandomcolorModule } from 'angular-randomcolor';
     SquareComponent,
     ElementComponent,
     ThirdComponent,
-    FourthComponent
+    FourthComponent,
+    FifthComponent
   ],
   imports: [
     BrowserModule,

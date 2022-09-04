@@ -24,6 +24,7 @@
     "angular-randomcolor": "^1.0.3",
     "rand-seed": "^1.0.1",
     "rxjs": "~7.4.0",
+    "simplex-noise": "^3.0.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },

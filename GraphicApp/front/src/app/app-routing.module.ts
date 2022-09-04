@@ -6,6 +6,8 @@ import {PageNotFoundComponent} from "./pages/page-not-found/page-not-found.compo
 import {ThirdComponent} from "./pages/third-rectangle/third.component";
 import {FourthComponent} from "./pages/fourth-rombuses/fourth.component";
 import {FifthComponent} from "./pages/fifth/fifth.component";
+import {SixthArcComponent} from "./pages/sixth-arc/sixth-arc.component";
+import {SeventhNetComponent} from "./pages/seventh-net/seventh-net.component";
 
 const routes: Routes = [
 
@@ -14,7 +16,9 @@ const routes: Routes = [
   { path: 'third-component', component: ThirdComponent },
   { path: 'fourth-component', component: FourthComponent },
   { path: 'fifth-component', component: FifthComponent },
-  { path: '',   redirectTo: 'fifth-component', pathMatch: 'full' }, // redirect to `first-component`
+  { path: 'sixth-component', component: SixthArcComponent },
+  { path: 'seventh-component', component: SeventhNetComponent },
+  { path: '',   redirectTo: 'seventh-component', pathMatch: 'full' }, // redirect to `first-component`
   { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 
 ];

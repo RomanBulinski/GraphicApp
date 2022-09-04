@@ -13,6 +13,13 @@ import { ThirdComponent } from './pages/third-rectangle/third.component';
 import { FourthComponent } from './pages/fourth-rombuses/fourth.component';
 import { RandomcolorModule } from 'angular-randomcolor';
 import { FifthComponent } from './pages/fifth/fifth.component';
+import {CanvasPreparer} from "./objects/canvas-preparer";
+import { SixthArcComponent } from './pages/sixth-arc/sixth-arc.component';
+import { SeventhNetComponent } from './pages/seventh-net/seventh-net.component';
+import { MatSliderModule } from '@angular/material/slider';
+import {MatButtonModule} from '@angular/material/button';
+
+
 
 
 @NgModule({
@@ -25,15 +32,20 @@ import { FifthComponent } from './pages/fifth/fifth.component';
     ElementComponent,
     ThirdComponent,
     FourthComponent,
-    FifthComponent
+    FifthComponent,
+    SixthArcComponent,
+    SeventhNetComponent
   ],
   imports: [
+    MatButtonModule,
+    MatSliderModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    RandomcolorModule
+    RandomcolorModule,
+
   ],
-  providers: [],
+  providers: [CanvasPreparer],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

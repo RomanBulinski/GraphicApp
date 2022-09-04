@@ -2,6 +2,7 @@ import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
 import {Utils} from "../../objects/utils";
 import {Agent} from "../../objects/agent";
 
+
 @Component({
   selector: 'app-first',
   templateUrl: './first.component.html',
@@ -16,7 +17,8 @@ export class FirstComponent implements OnInit {
 
   @ViewChild('canvas', {static: true}) canvas!: ElementRef<HTMLCanvasElement>;
 
-  constructor(private ngZone: NgZone) {}
+  constructor(private ngZone: NgZone) {
+  }
 
   ngOnInit(): void {
 
@@ -44,9 +46,11 @@ export class FirstComponent implements OnInit {
           for (let j = i + 1; j < this.agents.length; j++) {
             const otherAgent = this.agents[j];
 
-            const dist = agent.pos.getDistance( otherAgent.pos);
+            const dist = agent.pos.getDistance(otherAgent.pos);
 
-            if (dist > 100) { continue; }
+            if (dist > 100) {
+              continue;
+            }
 
             this.ctx.lineWidth = Utils.mapRange(dist, 100, 0, 6, 1);
 
@@ -70,7 +74,7 @@ export class FirstComponent implements OnInit {
   }
 
   private fillCanvas(): void {
-    this.ctx.fillStyle = 'red' ;
+    this.ctx.fillStyle = 'red';
     this.ctx.fillRect(0, 0, this.WIDTH, this.HEIGHT);
   }
 

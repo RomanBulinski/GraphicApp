@@ -34,13 +34,20 @@ export class SeventhNetComponent implements OnInit {
   lineWidth: number = 5;
   color: string = "";
 
-  constructor(private ngZone: NgZone,
-  ) {
+  constructor(private ngZone: NgZone,) {
   }
+
+  formatLabel(value: number) {
+    this.cols = value;
+    console.log(value)
+    return value;
+  }
+
 
   ngOnInit(): void {
 
     this.prepareCanvas('black');
+
     const random = new SimplexNoise(Math.random);
     let frequency = 0.002
     let amplitude = 90
@@ -54,17 +61,7 @@ export class SeventhNetComponent implements OnInit {
     // })
 
     // prepare points in array
-    for (let i = 0; i < this.numCells; i++) {
-      let x = (i % this.cols) * this.cw;
-      let y = Math.floor(i / this.cols) * this.ch;
-      let n = random.noise2D(x * frequency, y * frequency);
-
-      let lineWidth = Utils.mapRange(n*10 , 10, -10,20,1);
-      // let color = colors[Math.floor(Utils.mapRange(n*10 , 10, -10,0,10))];
-      let color = Math.floor(0x1000000 * n*10).toString(16);
-
-      this.points.push(new SimplePoint(x + (n * amplitude), y + (n * amplitude), lineWidth, color))
-    }
+    this.points = this.preparePoints(random, frequency, amplitude);
 
     this.ctx.save()// save() na poczatku i restore() na koncu
     this.ctx.translate(this.mx, this.my)
@@ -123,6 +120,24 @@ export class SeventhNetComponent implements OnInit {
     //   point.draw(this.ctx))
 
     this.ctx.restore() // save() na poczatku i restore() na koncu
+  }
+
+  private preparePoints(random: SimplexNoise, frequency: number, amplitude: number): SimplePoint[] {
+
+    let tempPoints: SimplePoint[] = []
+
+    for (let i = 0; i < this.numCells; i++) {
+      let x = (i % this.cols) * this.cw;
+      let y = Math.floor(i / this.cols) * this.ch;
+      let n = random.noise2D(x * frequency, y * frequency);
+
+      let lineWidth = Utils.mapRange(n * 10, 10, -10, 20, 1);
+      // let color = colors[Math.floor(Utils.mapRange(n*10 , 10, -10,0,10))];
+      let color = Math.floor(0x1000000 * n * 10).toString(16);
+
+      tempPoints.push(new SimplePoint(x + (n * amplitude), y + (n * amplitude), lineWidth, color))
+    }
+    return tempPoints;
   }
 
   public prepareCanvas(color: string) {

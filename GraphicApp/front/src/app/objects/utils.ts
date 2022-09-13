@@ -11,7 +11,8 @@ export class Utils {
   static mapRange(inputNumber: number, maxInput: number, minInput: number, maxOutput: number, minOutput: number): number {
     let outputNumber = 0;
     if (inputNumber <= maxInput && inputNumber >= minInput) {
-      outputNumber = maxOutput - ( (maxOutput - minOutput) * (inputNumber - minInput ) / maxInput - minInput );
+      let tempNumber =  ((maxOutput - minOutput) * (inputNumber - minInput )) / (maxInput - minInput);
+      outputNumber = maxOutput - tempNumber;
     }
     return outputNumber;
   }

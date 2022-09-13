@@ -18,9 +18,7 @@ import { SixthArcComponent } from './pages/sixth-arc/sixth-arc.component';
 import { SeventhNetComponent } from './pages/seventh-net/seventh-net.component';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatButtonModule} from '@angular/material/button';
-
-
-
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
@@ -43,7 +41,7 @@ import {MatButtonModule} from '@angular/material/button';
     AppRoutingModule,
     BrowserAnimationsModule,
     RandomcolorModule,
-
+    FlexLayoutModule
   ],
   providers: [CanvasPreparer],
   bootstrap: [AppComponent]

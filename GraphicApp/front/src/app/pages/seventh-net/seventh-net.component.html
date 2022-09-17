@@ -1,11 +1,41 @@
-<div  fxLayout="row" fxLayoutAlign="center">
+<div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
   <canvas #canvas></canvas>
-  <mat-slider
-    thumbLabel
-    [displayWith]="formatLabel"
-    tickInterval="50"
-    step="1"
-    min="10"
-    max="100"
-    aria-label="units"></mat-slider>
+
+  <div>
+    <div>Number of lines</div>
+    <mat-slider
+      thumbLabel
+      [displayWith]="formatLabel"
+      [(ngModel)]="rows"
+      tickInterval="50"
+      step="1"
+      min="10"
+      max="100"
+      aria-label="units"></mat-slider>
+
+    <div>Number of segments</div>
+    <mat-slider
+      thumbLabel
+      [displayWith]="formatLabel"
+      [(ngModel)]="cols"
+      tickInterval="50"
+      step="1"
+      min="3"
+      max="100"
+      aria-label="units"></mat-slider>
+
+    <div>Width</div>
+    <mat-slider
+      thumbLabel
+      [displayWith]="formatLabel"
+      [(ngModel)]="maxWidth"
+      tickInterval="50"
+      step="1"
+      min="0"
+      max="400"
+      aria-label="units"></mat-slider>
+  </div>
+
+  <button mat-raised-button (click)="action()">Basic</button>
+
 </div>

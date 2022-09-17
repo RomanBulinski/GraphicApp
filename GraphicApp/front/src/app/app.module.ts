@@ -19,6 +19,7 @@ import { SeventhNetComponent } from './pages/seventh-net/seventh-net.component';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatButtonModule} from '@angular/material/button';
 import {FlexLayoutModule} from "@angular/flex-layout";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -34,15 +35,16 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     SixthArcComponent,
     SeventhNetComponent
   ],
-  imports: [
-    MatButtonModule,
-    MatSliderModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    RandomcolorModule,
-    FlexLayoutModule
-  ],
+    imports: [
+        MatButtonModule,
+        MatSliderModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        RandomcolorModule,
+        FlexLayoutModule,
+        FormsModule
+    ],
   providers: [CanvasPreparer],
   bootstrap: [AppComponent]
 })

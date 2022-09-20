@@ -4,17 +4,21 @@
   <div>
     <div>Number of lines</div>
     <mat-slider
+      #linesSlider
+      (pointerup)="linesSliderOnChange(linesSlider.value)"
       thumbLabel
       [displayWith]="formatLabel"
       [(ngModel)]="rows"
       tickInterval="50"
       step="1"
-      min="10"
-      max="100"
+      min="3"
+      max="30"
       aria-label="units"></mat-slider>
 
     <div>Number of segments</div>
     <mat-slider
+      #segmentsSlider
+      (pointerup)="segmentsSliderOnChange(segmentsSlider.value)"
       thumbLabel
       [displayWith]="formatLabel"
       [(ngModel)]="cols"
@@ -26,16 +30,44 @@
 
     <div>Width</div>
     <mat-slider
+      #widthSlider
+      (pointerup)="widthSliderOnChange(widthSlider.value)"
       thumbLabel
       [displayWith]="formatLabel"
       [(ngModel)]="maxWidth"
       tickInterval="50"
       step="1"
       min="0"
+      max="20"
+      aria-label="units"></mat-slider>
+
+    <div>Start Ratio</div>
+    <mat-slider
+      #startRatioSlider
+      (pointerup)="startRatioSliderOnChange(startRatioSlider.value)"
+      thumbLabel
+      [displayWith]="formatLabel"
+      [(ngModel)]="startRatio"
+      tickInterval="50"
+      step="0.1"
+      min="0.1"
+      max="6"
+      aria-label="units"></mat-slider>
+
+    <div>Length Ratio</div>
+    <mat-slider
+      #lengthRatioSlider
+      (pointerup)="lengthRatioSliderOnChange(lengthRatioSlider.value)"
+      thumbLabel
+      [displayWith]="formatLabel"
+      [(ngModel)]="lengthRatio"
+      tickInterval="50"
+      step="10"
+      min="10"
       max="400"
       aria-label="units"></mat-slider>
   </div>
 
-  <button mat-raised-button (click)="action()">Basic</button>
+  <button mat-raised-button (click)="action()">Rebuild</button>
 
 </div>

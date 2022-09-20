@@ -4,12 +4,16 @@ export class SimplePoint {
   y: number
   lineWidth: number
   color: string
+  ix: number //initial x
+  iy: number //initial y
 
   constructor(x: number, y: number, lineWidth: number, color: string ) {
     this.x = x;
     this.y = y;
     this.lineWidth = lineWidth;
     this.color = color;
+    this.ix = x;
+    this.iy = y
   }
 
   draw(ctx: CanvasRenderingContext2D) {

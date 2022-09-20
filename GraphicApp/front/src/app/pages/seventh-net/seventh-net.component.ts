@@ -3,6 +3,10 @@ import {HEIGHT_CANVAS, WIDTH_CANVAS} from "../../objects/global-variabels";
 import {SimplePoint} from "../../objects/simplePoint";
 import SimplexNoise from 'simplex-noise';
 import {Utils} from "../../objects/utils";
+import {MatSliderChange} from "@angular/material/slider";
+import {BehaviorSubject} from "rxjs";
+
+// import {colors} from "@angular/cli/utilities/color";
 
 @Component({
   selector: 'app-seventh-net',
@@ -15,24 +19,26 @@ export class SeventhNetComponent implements OnInit {
   @ViewChild('canvas', {static: true}) canvas!: ElementRef<HTMLCanvasElement>;
 
   cols = 70;
-  rows = 3;
+  rows = 5;
   numCells = 0;
   points: SimplePoint[] = []
-  maxWidth = 20
+  maxWidth = 2
+  startRatio = 0.5
+  lengthRatio = 150
 
   //grid
-  gw:any;
-  gh:any;
+  gw: any;
+  gh: any;
   //cell
-  cw:any
-  ch:any
+  cw: any
+  ch: any
   //margin
-  mx:any
-  my:any
+  mx: any
+  my: any
 
-  RANDOM:any
-  FREQUENCY:any
-  AMPLITUDE:any
+  RANDOM: any
+  FREQUENCY: any
+  AMPLITUDE: any
 
   lineWidth: number = 5;
   color: string = "";
@@ -41,13 +47,43 @@ export class SeventhNetComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.RANDOM = new SimplexNoise(Math.random);
+    this.FREQUENCY = 0.002
+    this.AMPLITUDE = 90
+
+    // let colors = createColormap({
+    //   colormap: 'magma',
+    //   nshades: amplitude,
+    //   format: 'hex',
+    //   alpha: 1
+    // })
+
     this.prepareCanvas('black');
   }
 
-  //for slider
-  formatLabel(value: number) {
-    this.rows = value;
-    return value;
+  action() {
+    // this.ngZone.runOutsideAngular(() => {
+    //   const loop = () => {
+
+        this.prepareCanvas('black');
+        this.setParameters();
+        this.points = this.setPointsInArray(this.RANDOM, this.FREQUENCY, this.AMPLITUDE);
+
+        this.translateAndDraw();
+
+      //   requestAnimationFrame(loop);
+      // };
+    //   requestAnimationFrame(loop);
+    // });
+  }
+
+  public prepareCanvas(color: string) {
+    this.canvas.nativeElement.width = WIDTH_CANVAS;
+    this.canvas.nativeElement.height = HEIGHT_CANVAS;
+    this.ctx = this.canvas.nativeElement.getContext('2d')!;
+    this.ctx.fillStyle = color;
+    this.ctx.fillRect(2, 2, WIDTH_CANVAS - 4, HEIGHT_CANVAS - 4);
   }
 
   setParameters(): void {
@@ -61,27 +97,29 @@ export class SeventhNetComponent implements OnInit {
     this.mx = (WIDTH_CANVAS - this.gw) * 0.5;
     this.my = (HEIGHT_CANVAS - this.gh) * 0.5;
 
-    this.RANDOM = new SimplexNoise(Math.random);
-    this.FREQUENCY = 0.002
-    this.AMPLITUDE = 90
-
     this.numCells = this.cols * this.rows;
   }
 
-  action() {
-    // let colors = createColormap({
-    //   colormap: 'magma',
-    //   nshades: amplitude,
-    //   format: 'hex',
-    //   alpha: 1
-    // })
-    this.prepareCanvas('black');
-    this.setParameters();
-    this.points = this.setPointsInArray(this.RANDOM, this.FREQUENCY, this.AMPLITUDE);
-    this.translateAndDraww();
+  private setPointsInArray(random: SimplexNoise, frequency: number, amplitude: number): SimplePoint[] {
+
+    let tempPoints: SimplePoint[] = []
+
+    for (let i = 0; i < this.numCells; i++) {
+      let x = (i % this.cols) * this.cw;
+      let y = Math.floor(i / this.cols) * this.ch;
+      let n = random.noise2D(x * frequency, y * frequency);
+
+      let lineWidth = Utils.mapRange(n * 10, 10, -10, this.maxWidth, 1);
+      // let color = colors[Math.floor(Utils.mapRange(n*10 , 10, -10,0,10))];
+      let color = Math.floor(0x1000000 * n * 10).toString(16);
+
+      tempPoints.push(new SimplePoint(x + (n * amplitude), y + (n * amplitude), lineWidth, color))
+    }
+    return tempPoints;
   }
 
-  private translateAndDraww() {
+
+  private translateAndDraw() {
 
     this.ctx.save()// save() na poczatku i restore() na koncu
     this.ctx.translate(this.mx, this.my)
@@ -93,21 +131,26 @@ export class SeventhNetComponent implements OnInit {
     let lastx: number = 0;
     let lasty: number = 0;
 
-    this.drawLinesBetweenPoints(lastx, lasty);
+    this.points.forEach(point => {
 
-    this.ctx.restore() // save() na poczatku i restore() na koncu
-  }
+      // let n = this.RANDOM.noise2D(point.ix * this.FREQUENCY + 10 , point.iy * this.FREQUENCY);
+      // point.x = point.ix + 1;
+      // point.y = point.iy + 1;
 
-// draw lines between points
-  private drawLinesBetweenPoints(lastx: number, lasty: number) {
+      point.x = point.x + 1;
+      point.y = point.y + 1;
+
+    })
+    console.log("-----------------------")
+    // draw lines between points
     for (let r = 0; r < this.rows; r++) {
       // this.ctx.beginPath()
       for (let c = 0; c < this.cols - 1; c++) {
         let curr = this.points[r * this.cols + c + 0]
         let next = this.points[r * this.cols + c + 1]
 
-        let mx = curr.x + (next.x - curr.x) * 0.5;
-        let my = curr.y + (next.y - curr.y) * 0.5;
+        let mx = curr.x + (next.x - curr.x) * this.startRatio;
+        let my = curr.y + (next.y - curr.y) * this.startRatio;
 
         // linie proste
         // if (!c) this.ctx.moveTo(point.x, point.y)
@@ -133,36 +176,56 @@ export class SeventhNetComponent implements OnInit {
 
         this.ctx.stroke()
 
-        lastx = mx;
-        lasty = my;
+        // lastx = mx;
+        // lasty = my;
+
+        lastx = mx - c / this.cols * this.lengthRatio;
+        lasty = my - r / this.rows * this.lengthRatio;
       }
     }
+    this.ctx.restore() // save() na poczatku i restore() na koncu
   }
 
-  private setPointsInArray(random: SimplexNoise, frequency: number, amplitude: number): SimplePoint[] {
+  //for slider
+  formatLabel(value: number) {
+    this.rows = value;
+    return value;
+  }
 
-    let tempPoints: SimplePoint[] = []
 
-    for (let i = 0; i < this.numCells; i++) {
-      let x = (i % this.cols) * this.cw;
-      let y = Math.floor(i / this.cols) * this.ch;
-      let n = random.noise2D(x * frequency, y * frequency);
-
-      let lineWidth = Utils.mapRange(n * 10, 10, -10, this.maxWidth, 1);
-      // let color = colors[Math.floor(Utils.mapRange(n*10 , 10, -10,0,10))];
-      let color = Math.floor(0x1000000 * n * 10).toString(16);
-
-      tempPoints.push(new SimplePoint(x + (n * amplitude), y + (n * amplitude), lineWidth, color))
+  segmentsSliderOnChange(value: number) {
+    if (this.cols !== value) {
+      this.cols = value;
+      this.action()
     }
-    return tempPoints;
   }
 
-  public prepareCanvas(color: string) {
-    this.canvas.nativeElement.width = WIDTH_CANVAS;
-    this.canvas.nativeElement.height = HEIGHT_CANVAS;
-    this.ctx = this.canvas.nativeElement.getContext('2d')!;
-    this.ctx.fillStyle = color;
-    this.ctx.fillRect(2, 2, WIDTH_CANVAS - 4, HEIGHT_CANVAS - 4);
+  linesSliderOnChange(value: number) {
+    if (this.rows !== value) {
+      this.rows = value;
+      this.action()
+    }
+  }
+
+  widthSliderOnChange(value: number) {
+    if (this.maxWidth !== value) {
+      this.maxWidth = value;
+      this.action()
+    }
+  }
+
+  startRatioSliderOnChange(value: number) {
+    if (this.startRatio !== value) {
+      this.startRatio = value;
+      this.action()
+    }
+  }
+
+  lengthRatioSliderOnChange(value: number) {
+    if (this.lengthRatio !== value) {
+      this.lengthRatio = value;
+      this.action()
+    }
   }
 
 }

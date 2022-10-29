@@ -20,6 +20,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import {MatButtonModule} from '@angular/material/button';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {FormsModule} from "@angular/forms";
+import { EighthFlowersComponent } from './pages/eighth-flowers/eighth-flowers.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {FormsModule} from "@angular/forms";
     FourthComponent,
     FifthComponent,
     SixthArcComponent,
-    SeventhNetComponent
+    SeventhNetComponent,
+    EighthFlowersComponent
   ],
     imports: [
         MatButtonModule,
@@ -43,7 +45,7 @@ import {FormsModule} from "@angular/forms";
         BrowserAnimationsModule,
         RandomcolorModule,
         FlexLayoutModule,
-        FormsModule
+        FormsModule,
     ],
   providers: [CanvasPreparer],
   bootstrap: [AppComponent]

@@ -1,10 +1,8 @@
-import {Component, ElementRef, NgZone, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
 import {HEIGHT_CANVAS, WIDTH_CANVAS} from "../../objects/global-variabels";
 import {SimplePoint} from "../../objects/simplePoint";
 import SimplexNoise from 'simplex-noise';
 import {Utils} from "../../objects/utils";
-import {MatSliderChange} from "@angular/material/slider";
-import {BehaviorSubject} from "rxjs";
 
 // import {colors} from "@angular/cli/utilities/color";
 
@@ -27,14 +25,14 @@ export class SeventhNetComponent implements OnInit {
   lengthRatio = 150
 
   //grid
-  gw: any;
-  gh: any;
+  gridW: any;
+  gridH: any;
   //cell
-  cw: any
-  ch: any
+  cellW: any
+  cellH: any
   //margin
-  mx: any
-  my: any
+  marignX: any
+  marginY: any
 
   RANDOM: any
   FREQUENCY: any
@@ -42,6 +40,8 @@ export class SeventhNetComponent implements OnInit {
 
   lineWidth: number = 5;
   color: string = "";
+
+  animationID = 0;
 
   constructor(private ngZone: NgZone,) {
   }
@@ -62,20 +62,38 @@ export class SeventhNetComponent implements OnInit {
     this.prepareCanvas('black');
   }
 
-  action() {
-    // this.ngZone.runOutsideAngular(() => {
-    //   const loop = () => {
+
+  animation(){
+
+    this.ngZone.runOutsideAngular(() => {
+      const loop = () => {
 
         this.prepareCanvas('black');
-        this.setParameters();
-        this.points = this.setPointsInArray(this.RANDOM, this.FREQUENCY, this.AMPLITUDE);
+
+        for (let r = 0; r < this.rows; r++) {
+          for (let c = 0; c < this.cols - 1; c++) {
+            this.points[r * this.cols + c + 0].y = this.points[r * this.cols + c + 1].y
+            }
+          this.points[r * this.cols + this.cols-1].y = this.points[r * this.cols].y
+          }
 
         this.translateAndDraw();
 
-      //   requestAnimationFrame(loop);
-      // };
-    //   requestAnimationFrame(loop);
-    // });
+        requestAnimationFrame(loop);
+      };
+
+      this.animationID = requestAnimationFrame(loop);
+
+    });
+
+
+  }
+
+  action() {
+    this.prepareCanvas('black');
+    this.setParameters();
+    this.points = this.setPointsInArray(this.RANDOM, this.FREQUENCY, this.AMPLITUDE);
+    this.translateAndDraw();
   }
 
   public prepareCanvas(color: string) {
@@ -88,14 +106,14 @@ export class SeventhNetComponent implements OnInit {
 
   setParameters(): void {
     //grid
-    this.gw = WIDTH_CANVAS * 0.8 //grid Width
-    this.gh = HEIGHT_CANVAS * 0.8 //grid Width
+    this.gridW = WIDTH_CANVAS * 0.8 //grid Width
+    this.gridH = HEIGHT_CANVAS * 0.8 //grid Width
     //cell
-    this.cw = this.gw / this.cols
-    this.ch = this.gh / this.rows
+    this.cellW = this.gridW / this.cols
+    this.cellH = this.gridH / this.rows
     //margin
-    this.mx = (WIDTH_CANVAS - this.gw) * 0.5;
-    this.my = (HEIGHT_CANVAS - this.gh) * 0.5;
+    this.marignX = (WIDTH_CANVAS - this.gridW) * 0.5;
+    this.marginY = (HEIGHT_CANVAS - this.gridH) * 0.5;
 
     this.numCells = this.cols * this.rows;
   }
@@ -105,8 +123,8 @@ export class SeventhNetComponent implements OnInit {
     let tempPoints: SimplePoint[] = []
 
     for (let i = 0; i < this.numCells; i++) {
-      let x = (i % this.cols) * this.cw;
-      let y = Math.floor(i / this.cols) * this.ch;
+      let x = (i % this.cols) * this.cellW;
+      let y = Math.floor(i / this.cols) * this.cellH;
       let n = random.noise2D(x * frequency, y * frequency);
 
       let lineWidth = Utils.mapRange(n * 10, 10, -10, this.maxWidth, 1);
@@ -114,6 +132,7 @@ export class SeventhNetComponent implements OnInit {
       let color = Math.floor(0x1000000 * n * 10).toString(16);
 
       tempPoints.push(new SimplePoint(x + (n * amplitude), y + (n * amplitude), lineWidth, color))
+      // tempPoints.push(new SimplePoint(x , y , lineWidth, color))
     }
     return tempPoints;
   }
@@ -122,8 +141,8 @@ export class SeventhNetComponent implements OnInit {
   private translateAndDraw() {
 
     this.ctx.save()// save() na poczatku i restore() na koncu
-    this.ctx.translate(this.mx, this.my)
-    this.ctx.translate(this.cw * 0.5, this.ch * 0.5)
+    this.ctx.translate(this.marignX, this.marginY)
+    this.ctx.translate(this.cellW * 0.5, this.cellH * 0.5)
 
     this.ctx.strokeStyle = "red"
     this.ctx.lineWidth = 4
@@ -131,17 +150,6 @@ export class SeventhNetComponent implements OnInit {
     let lastx: number = 0;
     let lasty: number = 0;
 
-    this.points.forEach(point => {
-
-      // let n = this.RANDOM.noise2D(point.ix * this.FREQUENCY + 10 , point.iy * this.FREQUENCY);
-      // point.x = point.ix + 1;
-      // point.y = point.iy + 1;
-
-      point.x = point.x + 1;
-      point.y = point.y + 1;
-
-    })
-    console.log("-----------------------")
     // draw lines between points
     for (let r = 0; r < this.rows; r++) {
       // this.ctx.beginPath()
@@ -191,7 +199,6 @@ export class SeventhNetComponent implements OnInit {
     this.rows = value;
     return value;
   }
-
 
   segmentsSliderOnChange(value: number) {
     if (this.cols !== value) {

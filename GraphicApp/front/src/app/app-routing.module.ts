@@ -9,6 +9,7 @@ import {FifthComponent} from "./pages/fifth/fifth.component";
 import {SixthArcComponent} from "./pages/sixth-arc/sixth-arc.component";
 import {SeventhNetComponent} from "./pages/seventh-net/seventh-net.component";
 import {EighthFlowersComponent} from "./pages/eighth-flowers/eighth-flowers.component";
+import {TenthPickFlowersComponent} from "./pages/tenth-pick-flowers/tenth-pick-flowers.component";
 
 const routes: Routes = [
 
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'sixth-component', component: SixthArcComponent },
   { path: 'seventh-component', component: SeventhNetComponent },
   { path: 'eighth-component', component: EighthFlowersComponent },
+  { path: 'tenth-component', component: TenthPickFlowersComponent },
   { path: '',   redirectTo: 'eighth-component', pathMatch: 'full' }, // redirect to `first-component`
   { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 

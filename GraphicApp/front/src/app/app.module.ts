@@ -21,6 +21,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {FormsModule} from "@angular/forms";
 import { EighthFlowersComponent } from './pages/eighth-flowers/eighth-flowers.component';
+import { TenthPickFlowersComponent } from './pages/tenth-pick-flowers/tenth-pick-flowers.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { EighthFlowersComponent } from './pages/eighth-flowers/eighth-flowers.co
     FifthComponent,
     SixthArcComponent,
     SeventhNetComponent,
-    EighthFlowersComponent
+    EighthFlowersComponent,
+    TenthPickFlowersComponent
   ],
     imports: [
         MatButtonModule,

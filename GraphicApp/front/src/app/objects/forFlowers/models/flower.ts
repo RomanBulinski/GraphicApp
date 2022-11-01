@@ -2,11 +2,17 @@ import {FlowerCenter} from "./flower-center";
 import {Petal} from "./petal";
 
 export class Flower {
+
+  private readonly originalPetalRadius!: number;
+  public stopChanging = false;
+
   constructor(
     private readonly flowerCenter: FlowerCenter,
     private readonly numberOfPetals: number,
     private petal: Petal
-  ) { }
+  ) {
+    this.originalPetalRadius = this.petal.radius;
+  }
 
   draw(context: CanvasRenderingContext2D) {
     this.drawPetals(context);
@@ -21,6 +27,15 @@ export class Flower {
       this.petal.angleSpan,
       this.petal.color
     );
+  }
+
+  increasePetalRadiusWithLimit() {
+    if (this.petal.radius < this.originalPetalRadius + 20) {
+      this.stopChanging = false;
+      this.increasePetalRadius();
+    } else {
+      this.stopChanging = true;
+    }
   }
 
   private drawPetals(context: CanvasRenderingContext2D) {

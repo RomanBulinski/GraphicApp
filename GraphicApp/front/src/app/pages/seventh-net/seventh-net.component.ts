@@ -42,6 +42,7 @@ export class SeventhNetComponent implements OnInit {
   color: string = "";
 
   animationID = 0;
+  ref: number = 0;
 
   constructor(private ngZone: NgZone,) {
   }
@@ -60,33 +61,38 @@ export class SeventhNetComponent implements OnInit {
     // })
 
     this.prepareCanvas('black');
+    window.cancelAnimationFrame(this.ref)
   }
 
+  public animate() {
+    this.prepareCanvas('black');
+    for (let r = 0; r < this.rows; r++) {
+      for (let c = 0; c < this.cols - 1; c++) {
+        this.points[r * this.cols + c + 0].y = this.points[r * this.cols + c + 1].y
+      }
+      this.points[r * this.cols + this.cols - 1].y = this.points[r * this.cols].y
+    }
+    console.log("aaaaaanimujeeeeeeeeeee")
+    this.translateAndDraw();
 
-  animation(){
+    this.ref = window.requestAnimationFrame(() => this.animate())
+  }
 
+  animationWithNgZone() {
     this.ngZone.runOutsideAngular(() => {
       const loop = () => {
-
         this.prepareCanvas('black');
-
         for (let r = 0; r < this.rows; r++) {
           for (let c = 0; c < this.cols - 1; c++) {
             this.points[r * this.cols + c + 0].y = this.points[r * this.cols + c + 1].y
-            }
-          this.points[r * this.cols + this.cols-1].y = this.points[r * this.cols].y
           }
-
+          this.points[r * this.cols + this.cols - 1].y = this.points[r * this.cols].y
+        }
         this.translateAndDraw();
-
         requestAnimationFrame(loop);
       };
-
       this.animationID = requestAnimationFrame(loop);
-
     });
-
-
   }
 
   action() {

@@ -23,6 +23,9 @@ import {FormsModule} from "@angular/forms";
 import { EighthFlowersComponent } from './pages/eighth-flowers/eighth-flowers.component';
 import { TenthPickFlowersComponent } from './pages/tenth-pick-flowers/tenth-pick-flowers.component';
 import { EleventhSoundComponent } from './pages/eleventh-sound/eleventh-sound.component';
+import { TwelfthSoundCircleComponent } from './pages/twelfth-sound-circle/twelfth-sound-circle.component';
+import { ThirteenthSoundCircle2Component } from './pages/thirteenth-sound-circle2/thirteenth-sound-circle2.component';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +42,9 @@ import { EleventhSoundComponent } from './pages/eleventh-sound/eleventh-sound.co
     SeventhNetComponent,
     EighthFlowersComponent,
     TenthPickFlowersComponent,
-    EleventhSoundComponent
+    EleventhSoundComponent,
+    TwelfthSoundCircleComponent,
+    ThirteenthSoundCircle2Component,
   ],
     imports: [
         MatButtonModule,
@@ -50,8 +55,9 @@ import { EleventhSoundComponent } from './pages/eleventh-sound/eleventh-sound.co
         RandomcolorModule,
         FlexLayoutModule,
         FormsModule,
+
     ],
-  providers: [CanvasPreparer],
+  providers: [CanvasPreparer ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

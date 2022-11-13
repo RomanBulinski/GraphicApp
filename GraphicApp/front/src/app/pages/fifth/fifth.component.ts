@@ -1,6 +1,5 @@
 import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
 import {Point} from "../../objects/point";
-import {CanvasPreparer} from "../../objects/canvas-preparer";
 import {HEIGHT_CANVAS, WIDTH_CANVAS} from "../../objects/global-variabels";
 
 @Component({

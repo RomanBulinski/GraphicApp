@@ -1,7 +1,6 @@
 import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
 import {Utils} from "../../objects/utils";
 import {Romb} from "../../objects/romb";
-import {RandomcolorModule} from 'angular-randomcolor';
 import Rand, {PRNG} from 'rand-seed';
 
 @Component({

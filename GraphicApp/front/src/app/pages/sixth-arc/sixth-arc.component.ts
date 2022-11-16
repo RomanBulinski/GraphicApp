@@ -43,7 +43,7 @@ export class SixthArcComponent implements OnInit {
 
         this.canvas.nativeElement.addEventListener('mousedown', (e) => this.mousedown(e))
         this.canvas.nativeElement.addEventListener('mousemove', (e) => this.mouseMove(e));
-        this.canvas.nativeElement.addEventListener('mouseup', (e) => this.mouseUp());
+
 
         requestAnimationFrame(loop);
       };

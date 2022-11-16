@@ -13,6 +13,7 @@ import {TenthPickFlowersComponent} from "./pages/tenth-pick-flowers/tenth-pick-f
 import {EleventhSoundComponent} from "./pages/eleventh-sound/eleventh-sound.component";
 import {TwelfthSoundCircleComponent} from "./pages/twelfth-sound-circle/twelfth-sound-circle.component";
 import {ThirteenthSoundCircle2Component} from "./pages/thirteenth-sound-circle2/thirteenth-sound-circle2.component";
+import {FourteenthComponent} from "./pages/fourteenth/fourteenth.component";
 
 const routes: Routes = [
 
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'eleventh-component', component: EleventhSoundComponent },
   { path: 'twelfth-component', component: TwelfthSoundCircleComponent },
   { path: 'thirteenth-component', component: ThirteenthSoundCircle2Component },
+  { path: 'fourteenth-component', component: FourteenthComponent },
   { path: '',   redirectTo: 'eighth-component', pathMatch: 'full' }, // redirect to `first-component`
   { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 

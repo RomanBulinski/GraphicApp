@@ -25,6 +25,7 @@ import { TenthPickFlowersComponent } from './pages/tenth-pick-flowers/tenth-pick
 import { EleventhSoundComponent } from './pages/eleventh-sound/eleventh-sound.component';
 import { TwelfthSoundCircleComponent } from './pages/twelfth-sound-circle/twelfth-sound-circle.component';
 import { ThirteenthSoundCircle2Component } from './pages/thirteenth-sound-circle2/thirteenth-sound-circle2.component';
+import { FourteenthComponent } from './pages/fourteenth/fourteenth.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { ThirteenthSoundCircle2Component } from './pages/thirteenth-sound-circle
     EleventhSoundComponent,
     TwelfthSoundCircleComponent,
     ThirteenthSoundCircle2Component,
+    FourteenthComponent,
   ],
     imports: [
         MatButtonModule,

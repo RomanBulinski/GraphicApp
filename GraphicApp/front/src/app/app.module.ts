@@ -26,6 +26,7 @@ import { EleventhSoundComponent } from './pages/eleventh-sound/eleventh-sound.co
 import { TwelfthSoundCircleComponent } from './pages/twelfth-sound-circle/twelfth-sound-circle.component';
 import { ThirteenthSoundCircle2Component } from './pages/thirteenth-sound-circle2/thirteenth-sound-circle2.component';
 import { FourteenthComponent } from './pages/fourteenth/fourteenth.component';
+import { FifteenthParticlesComponent } from './pages/fifteenth-particles/fifteenth-particles.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { FourteenthComponent } from './pages/fourteenth/fourteenth.component';
     TwelfthSoundCircleComponent,
     ThirteenthSoundCircle2Component,
     FourteenthComponent,
+    FifteenthParticlesComponent,
   ],
     imports: [
         MatButtonModule,

@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Particle} from "../../objects/particle";
 import {HEIGHT_CANVAS, WIDTH_CANVAS} from "../../objects/global-variabels";
-import eases from "eases";
+
 
 @Component({
   selector: 'app-fifteenth-particles',
@@ -29,7 +29,7 @@ export class FifteenthParticlesComponent implements OnInit {
   cirRadius = 0;
   fitRadius = this.dotRadius
 
-  ease = eases;
+  ease = require('eases')
 
   constructor() {
   }

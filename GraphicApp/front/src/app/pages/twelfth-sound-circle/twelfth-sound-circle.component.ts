@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import eases from 'eases';
+
 import {HEIGHT_CANVAS, WIDTH_CANVAS} from "../../objects/global-variabels";
 import {Utils} from "../../objects/utils";
 
@@ -10,7 +10,7 @@ import {Utils} from "../../objects/utils";
 })
 export class TwelfthSoundCircleComponent implements OnInit {
 
-  ease = eases;
+  easeQuadIn = require('eases').quadIn
 
   private ctx!: CanvasRenderingContext2D;
   @ViewChild('canvas', {static: true}) canvas!: ElementRef<HTMLCanvasElement>;
@@ -63,7 +63,7 @@ export class TwelfthSoundCircleComponent implements OnInit {
 
     for (let i = 0; i < this.numCircles; i++) {
       let t = i / (this.numCircles - 1)
-      this.lineWidth = this.ease.quadIn(t) * 100 + 20;
+      this.lineWidth = this.easeQuadIn.quadIn(t) * 100 + 20;
       this.lineWidths.push(this.lineWidth)
     }
 

@@ -1,5 +1,4 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import eases from "eases";
 import {Utils} from "../../objects/utils";
 import {HEIGHT_CANVAS, WIDTH_CANVAS} from "../../objects/global-variabels";
 
@@ -10,7 +9,7 @@ import {HEIGHT_CANVAS, WIDTH_CANVAS} from "../../objects/global-variabels";
 })
 export class ThirteenthSoundCircle2Component implements OnInit {
 
-  ease = eases;
+  ease = require('eases').quadIn
 
   private ctx!: CanvasRenderingContext2D;
   @ViewChild('canvas', {static: true}) canvas!: ElementRef<HTMLCanvasElement>;

@@ -32,7 +32,7 @@ const routes: Routes = [
   { path: 'thirteenth-component', component: ThirteenthSoundCircle2Component },
   { path: 'fourteenth-component', component: FourteenthComponent },
   { path: 'fifteenth-component', component: FifteenthParticlesComponent },
-  { path: '',   redirectTo: 'eighth-component', pathMatch: 'full' }, // redirect to `first-component`
+  { path: '',   redirectTo: 'fifteenth-component', pathMatch: 'full' }, // redirect to ...
   { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 
 ];

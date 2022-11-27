@@ -15,6 +15,7 @@ import {TwelfthSoundCircleComponent} from "./pages/twelfth-sound-circle/twelfth-
 import {ThirteenthSoundCircle2Component} from "./pages/thirteenth-sound-circle2/thirteenth-sound-circle2.component";
 import {FourteenthComponent} from "./pages/fourteenth/fourteenth.component";
 import {FifteenthParticlesComponent} from "./pages/fifteenth-particles/fifteenth-particles.component";
+import {SixteenthPhotoComponent} from "./pages/sixteenth-photo/sixteenth-photo.component";
 
 const routes: Routes = [
 
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'thirteenth-component', component: ThirteenthSoundCircle2Component },
   { path: 'fourteenth-component', component: FourteenthComponent },
   { path: 'fifteenth-component', component: FifteenthParticlesComponent },
+  { path: 'sixteenth-component', component: SixteenthPhotoComponent },
   { path: '',   redirectTo: 'fifteenth-component', pathMatch: 'full' }, // redirect to ...
   { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 

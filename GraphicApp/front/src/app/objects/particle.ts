@@ -1,4 +1,5 @@
 import {Utils} from "./utils";
+import colormap from "colormap";
 
 export class Particle {
 
@@ -19,6 +20,8 @@ export class Particle {
   iy: number;
 
   radius = 5
+  scale = 1
+
   // minDist = 50;
   minDist = Utils.randomRange(50, 150)
   // pushFactor = 0.02
@@ -27,6 +30,11 @@ export class Particle {
   pullFactor = Utils.randomRange(0.002, 0.006)
   // dampFactor = 0.95
   dampFactor = Utils.randomRange(0.90, 0.95)
+
+  colormap = require('colormap')
+  colors: any;
+  idxColor: number = 0;
+  color: string = "white";
 
   constructor(x: number, y: number, radius = 5) {
     //position
@@ -47,14 +55,21 @@ export class Particle {
 
     this.radius = radius
 
+    this.colors = colormap({
+      colormap: 'viridis',
+      nshades: 20,
+      format: 'hex',
+      alpha: 1
+    })
+
   }
 
   draw(ctx: CanvasRenderingContext2D) {
     ctx.save();
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = this.color;
     ctx.translate(this.x, this.y);
     ctx.beginPath();
-    ctx.arc(0, 0, this.radius, 0, Math.PI * 2);
+    ctx.arc(0, 0, this.radius * this.scale, 0, Math.PI * 2);
     ctx.fill();
     ctx.restore();
   }
@@ -71,8 +86,14 @@ export class Particle {
     //pull force
     dx = this.ix - this.x
     dy = this.iy - this.y
+    dd = Math.sqrt(dx * dx + dy * dy)
+
     this.ax = dx * this.pullFactor;
     this.ay = dy * this.pullFactor;
+
+    this.scale = Utils.mapRange2(dd,100,0,5,1)
+    this.idxColor = Math.floor(Utils.mapRange2(dd,100,0,this.colors.length-1,0));
+    this.color = this.colors[this.idxColor];
 
     //push force
     dx = this.x - cursorx
@@ -94,8 +115,7 @@ export class Particle {
 
     this.x += this.vx
     this.y += this.vy
+
   }
-
-
 
 }

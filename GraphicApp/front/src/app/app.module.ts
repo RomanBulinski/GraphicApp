@@ -27,6 +27,7 @@ import { TwelfthSoundCircleComponent } from './pages/twelfth-sound-circle/twelft
 import { ThirteenthSoundCircle2Component } from './pages/thirteenth-sound-circle2/thirteenth-sound-circle2.component';
 import { FourteenthComponent } from './pages/fourteenth/fourteenth.component';
 import { FifteenthParticlesComponent } from './pages/fifteenth-particles/fifteenth-particles.component';
+import { SixteenthPhotoComponent } from './pages/sixteenth-photo/sixteenth-photo.component';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { FifteenthParticlesComponent } from './pages/fifteenth-particles/fifteen
     ThirteenthSoundCircle2Component,
     FourteenthComponent,
     FifteenthParticlesComponent,
+    SixteenthPhotoComponent,
   ],
     imports: [
         MatButtonModule,

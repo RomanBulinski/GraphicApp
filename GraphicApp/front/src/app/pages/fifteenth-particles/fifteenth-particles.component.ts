@@ -1,6 +1,7 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Particle} from "../../objects/particle";
 import {HEIGHT_CANVAS, WIDTH_CANVAS} from "../../objects/global-variabels";
+import colormap from "colormap";
 
 
 @Component({
@@ -8,8 +9,9 @@ import {HEIGHT_CANVAS, WIDTH_CANVAS} from "../../objects/global-variabels";
   templateUrl: './fifteenth-particles.component.html',
   styleUrls: ['./fifteenth-particles.component.scss']
 })
-export class FifteenthParticlesComponent implements OnInit {
+export class FifteenthParticlesComponent implements OnInit, OnDestroy {
 
+  ease = require('eases')
 
   private ctx!: CanvasRenderingContext2D;
   @ViewChild('canvas', {static: true}) canvas!: ElementRef<HTMLCanvasElement>;
@@ -29,7 +31,7 @@ export class FifteenthParticlesComponent implements OnInit {
   cirRadius = 0;
   fitRadius = this.dotRadius
 
-  ease = require('eases')
+  animationID!: number;
 
   constructor() {
   }
@@ -58,6 +60,7 @@ export class FifteenthParticlesComponent implements OnInit {
       this.dotRadius = (1-this.ease.quadOut(i/this.numCircles)) * this.fitRadius;
     }
 
+
     //code for random particles in circle
     // for (let i = 0; i < 300; i++) {
     //   let x = WIDTH_CANVAS / 2;
@@ -65,10 +68,12 @@ export class FifteenthParticlesComponent implements OnInit {
     //   let particle = this.setRandomParticlesInCircle( x, y, this.radius);
     //   this.particles.push(particle)
     // }
-
-
     this.animate()
     this.canvas.nativeElement.addEventListener('mousedown', (e) => this.onMouseDown(e));
+  }
+
+  ngOnDestroy(){
+    window.cancelAnimationFrame(this.animationID)
   }
 
   setRandomParticlesInCircle(x: number, y: number, radius: number): Particle {
@@ -120,12 +125,14 @@ export class FifteenthParticlesComponent implements OnInit {
 
     this.prepareCanvas('black')
 
+    this.particles.sort((a,b)=> a.scale - b.scale)
+
     this.particles.forEach(particle => {
       particle.update(this.cursor.x, this.cursor.y)
       particle.draw(this.ctx)
     })
 
-    window.requestAnimationFrame(() => this.animate());
+    this.animationID = window.requestAnimationFrame(() => this.animate());
   }
 
 }

@@ -28,7 +28,7 @@ export class FourteenthComponent implements OnInit {
     for (let i = 0; i < 1; i++) {
       let x = WIDTH_CANVAS / 2;
       let y = HEIGHT_CANVAS / 2;
-      let particle = new Particle(x, y)
+      let particle = new Particle(x, y, 5,'white')
       this.particles.push(particle)
     }
 
@@ -51,7 +51,7 @@ export class FourteenthComponent implements OnInit {
     this.cursor.x = x;
     this.cursor.y = y;
 
-    console.log(this.cursor)
+    // console.log(this.cursor)
   }
 
   onMouseUp() {

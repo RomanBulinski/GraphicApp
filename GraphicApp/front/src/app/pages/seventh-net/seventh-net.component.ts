@@ -72,9 +72,7 @@ export class SeventhNetComponent implements OnInit {
       }
       this.points[r * this.cols + this.cols - 1].y = this.points[r * this.cols].y
     }
-    console.log("aaaaaanimujeeeeeeeeeee")
     this.translateAndDraw();
-
     this.ref = window.requestAnimationFrame(() => this.animate())
   }
 

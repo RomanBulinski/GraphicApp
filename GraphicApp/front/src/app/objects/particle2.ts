@@ -1,7 +1,7 @@
 import {Utils} from "./utils";
 import colormap from "colormap";
 
-export class Particle {
+export class Particle2 {
 
   //position
   x: number = 0;
@@ -94,8 +94,8 @@ export class Particle {
     this.ay = dy * this.pullFactor;
 
     this.scale = Utils.mapRange2(dd,100,0,5,1)
-    this.idxColor = Math.floor(Utils.mapRange2(dd,100,0,this.colors.length-1,0));
-    this.color = this.colors[this.idxColor];
+    // this.idxColor = Math.floor(Utils.mapRange2(dd,100,0,this.colors.length-1,0));
+    // this.color = this.colors[this.idxColor];
 
     //push force
     dx = this.x - cursorx

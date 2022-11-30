@@ -53,7 +53,7 @@ export class FifteenthParticlesComponent implements OnInit, OnDestroy {
 
         this.radius = this.dotRadius
 
-        let particle = new Particle(x, y, this.radius);
+        let particle = new Particle(x, y, this.radius, 'white');
         this.particles.push(particle)
       }
       this.cirRadius += this.fitRadius *2 + this.gapCircle;
@@ -76,13 +76,13 @@ export class FifteenthParticlesComponent implements OnInit, OnDestroy {
     window.cancelAnimationFrame(this.animationID)
   }
 
-  setRandomParticlesInCircle(x: number, y: number, radius: number): Particle {
-    let random_angle = Math.random() * 2 * Math.PI;
-    let random_radius = Math.random() * radius * radius;
-    let temX = Math.sqrt(random_radius) * Math.cos(random_angle);
-    let temY = Math.sqrt(random_radius) * Math.sin(random_angle);
-    return new Particle(x + temX, y + temY)
-  }
+  // setRandomParticlesInCircle(x: number, y: number, radius: number): Particle {
+  //   let random_angle = Math.random() * 2 * Math.PI;
+  //   let random_radius = Math.random() * radius * radius;
+  //   let temX = Math.sqrt(random_radius) * Math.cos(random_angle);
+  //   let temY = Math.sqrt(random_radius) * Math.sin(random_angle);
+  //   return new Particle(x + temX, y + temY)
+  // }
 
 
   onMouseDown(e: MouseEvent) {
@@ -98,7 +98,7 @@ export class FifteenthParticlesComponent implements OnInit, OnDestroy {
     this.cursor.x = x;
     this.cursor.y = y;
 
-    console.log(this.cursor)
+    // console.log(this.cursor)
   }
 
   onMouseUp() {

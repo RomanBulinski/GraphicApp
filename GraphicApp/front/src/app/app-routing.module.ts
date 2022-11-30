@@ -34,7 +34,7 @@ const routes: Routes = [
   { path: 'fourteenth-component', component: FourteenthComponent },
   { path: 'fifteenth-component', component: FifteenthParticlesComponent },
   { path: 'sixteenth-component', component: SixteenthPhotoComponent },
-  { path: '',   redirectTo: 'fifteenth-component', pathMatch: 'full' }, // redirect to ...
+  { path: '',   redirectTo: 'sixteenth-component', pathMatch: 'full' }, // redirect to ...
   { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
 
 ];

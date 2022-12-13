@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 
 import {HEIGHT_CANVAS, WIDTH_CANVAS} from "../../objects/global-variabels";
 import {Utils} from "../../objects/utils";
@@ -8,9 +8,9 @@ import {Utils} from "../../objects/utils";
   templateUrl: './twelfth-sound-circle.component.html',
   styleUrls: ['./twelfth-sound-circle.component.scss']
 })
-export class TwelfthSoundCircleComponent implements OnInit {
+export class TwelfthSoundCircleComponent implements OnInit, OnDestroy {
 
-  easeQuadIn = require('eases').quadIn
+  easeQuadIn = require('eases')
 
   private ctx!: CanvasRenderingContext2D;
   @ViewChild('canvas', {static: true}) canvas!: ElementRef<HTMLCanvasElement>;
@@ -103,8 +103,10 @@ export class TwelfthSoundCircleComponent implements OnInit {
   createAudio() {
 
     this.audio = new Audio();
-    // this.audio.src = '../../../assets/mp3/mixkit.mp3'
-    this.audio.src = '../../../assets/mp3/morphed.mp3'
+    //dev mode
+    // this.audio.src = '../../../assets/mp3/morphed.mp3'
+    //prod mode
+    this.audio.src = 'assets/mp3/morphed.mp3'
     this.audioContext = new AudioContext();
 
     this.sourceNode = this.audioContext.createMediaElementSource(this.audio)
@@ -124,6 +126,11 @@ export class TwelfthSoundCircleComponent implements OnInit {
   playAudio() {
     this.audio.load();
     this.audio.autoplay = true;
+  }
+
+  stopAudio() {
+    this.audio.load();
+    this.audio.autoplay = false;
   }
 
   getAverage(data: any) {
@@ -160,6 +167,10 @@ export class TwelfthSoundCircleComponent implements OnInit {
       // this.prepareCanvas('white');
       // this.drawCircle(this.avg);
     });
+  }
+
+  ngOnDestroy(): void {
+    this.stopAudio();
   }
 
 }

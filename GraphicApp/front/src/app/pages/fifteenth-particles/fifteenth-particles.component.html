@@ -1,4 +1,55 @@
 <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
   <canvas #canvas></canvas>
-  <button mat-raised-button (click)="playAudio()">Play Sound</button>
+
+  <div fxLayout="column">
+    <div>
+      <div>Number of circles</div>
+      <mat-slider
+        #circleSlider
+        (pointerup)="numCirclesOnChange(circleSlider.value)"
+        thumbLabel
+        [displayWith]="formatLabel"
+        [(ngModel)]="numCircles"
+        tickInterval="50"
+        step="1"
+        min="3"
+        max="30"
+        aria-label="units"></mat-slider>
+    </div>
+
+    <div>
+      <div>Gap between circles</div>
+      <mat-slider
+        #gapSlider
+        (pointerup)="gapCirclesOnChange(gapSlider.value)"
+        thumbLabel
+        [displayWith]="formatLabel"
+        [(ngModel)]="gapCircle"
+        tickInterval="50"
+        step="1"
+        min="1"
+        max="30"
+        aria-label="units"></mat-slider>
+    </div>
+
+
+    <div>
+      <div>Dot radius</div>
+      <mat-slider
+        #dotSlider
+        (pointerup)="dotRadiusOnChange(dotSlider.value)"
+        thumbLabel
+        [displayWith]="formatLabel"
+        [(ngModel)]="radius"
+        tickInterval="50"
+        step="1"
+        min="1"
+        max="15"
+        aria-label="units"></mat-slider>
+    </div>
+  </div>
+
 </div>
+
+
+

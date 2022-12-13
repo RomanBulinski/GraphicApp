@@ -9,6 +9,8 @@
 ----------------------------------------------------
 
 
+public class GraphicAppApplication extends SpringBootServletInitializer
+
 1.urucohomienie frontu :
 - ng build , a potem
 - ng serve
@@ -23,15 +25,28 @@ A develope mode na localhoscie-> ustawienie urli w
 
 2.uruchomienie backendu:  spring przez Service
 
-
-w przegladarke wpisujemy -> localhost:8080 ( przeskakuje na 8080/Heb)
+w przegladarke wpisujemy -> localhost:8080 ( przeskakuje na 8080/graphicfront)
 
 
 B prod mode do deployu na tomcacie -> ustawienie urli w
 1.pom:
     <finalName>graphicfront</finalName>
 2.index.html
-    <base href="."> (?)
+- prod
+    <base href=".">
+- dev
+    <base href="/graphicfront">
+
+3. pathy do plików audio
+- prod
+    this.audio.src = 'assets/mp3/mixkit.mp3'
+- dev
+    this.audio.src = '../../../assets/mp3/mixkit.mp3'
+
+- ng build --prod
+- mvn clean packgae
+- war do odpowiedniego folderu na Tomcatcie 
+- doploy/start
 
 
 W pliku package.json

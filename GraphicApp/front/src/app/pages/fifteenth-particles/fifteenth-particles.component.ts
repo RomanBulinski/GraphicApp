@@ -25,20 +25,34 @@ export class FifteenthParticlesComponent implements OnInit, OnDestroy {
   radius = 7;
 
   numCircles = 12
-  gapCircle = 8
+  gapCircle = 2
   gapDot = 4
   dotRadius = 7;
   cirRadius = 0;
   fitRadius = this.dotRadius
 
-  animationID!: number;
+  animationID: number = 0;
+  counter = 0
 
   constructor() {
   }
 
   ngOnInit(): void {
     this.prepareCanvas('black');
+    this.createParticlesInCircles();
 
+    //code for random particles in circle
+    // for (let i = 0; i < 300; i++) {
+    //   let x = WIDTH_CANVAS / 2;
+    //   let y = HEIGHT_CANVAS / 2;
+    //   let particle = this.setRandomParticlesInCircle( x, y, this.radius);
+    //   this.particles.push(particle)
+    // }
+    this.animate()
+    this.canvas.nativeElement.addEventListener('mousedown', (e) => this.onMouseDown(e));
+  }
+
+  private createParticlesInCircles() {
     for (let i = 0; i < this.numCircles; i++) {
       let circumference = Math.PI * 2 * this.cirRadius;
       let numFit = i ? Math.floor(circumference / (this.fitRadius * 2 + this.gapDot)) : 1;
@@ -56,27 +70,12 @@ export class FifteenthParticlesComponent implements OnInit, OnDestroy {
         let particle = new Particle(x, y, this.radius, 'white');
         this.particles.push(particle)
       }
-      this.cirRadius += this.fitRadius *2 + this.gapCircle;
-      this.dotRadius = (1-this.ease.quadOut(i/this.numCircles)) * this.fitRadius;
+      this.cirRadius += this.fitRadius * 2 + this.gapCircle;
+      this.dotRadius = (1 - this.ease.quadOut(i / this.numCircles)) * this.fitRadius;
     }
-
-
-    //code for random particles in circle
-    // for (let i = 0; i < 300; i++) {
-    //   let x = WIDTH_CANVAS / 2;
-    //   let y = HEIGHT_CANVAS / 2;
-    //   let particle = this.setRandomParticlesInCircle( x, y, this.radius);
-    //   this.particles.push(particle)
-    // }
-    this.animate()
-    this.canvas.nativeElement.addEventListener('mousedown', (e) => this.onMouseDown(e));
   }
 
-  ngOnDestroy(){
-    window.cancelAnimationFrame(this.animationID)
-  }
-
-  // setRandomParticlesInCircle(x: number, y: number, radius: number): Particle {
+// setRandomParticlesInCircle(x: number, y: number, radius: number): Particle {
   //   let random_angle = Math.random() * 2 * Math.PI;
   //   let random_radius = Math.random() * radius * radius;
   //   let temX = Math.sqrt(random_radius) * Math.cos(random_angle);
@@ -94,24 +93,19 @@ export class FifteenthParticlesComponent implements OnInit, OnDestroy {
   onMouseMove(e: MouseEvent) {
     let x = (e.offsetX / this.canvas.nativeElement.offsetWidth) * this.canvas.nativeElement.width
     let y = (e.offsetY / this.canvas.nativeElement.offsetHeight) * this.canvas.nativeElement.height
-
     this.cursor.x = x;
     this.cursor.y = y;
-
     // console.log(this.cursor)
   }
 
   onMouseUp() {
     this.canvas.nativeElement.removeEventListener('mousemove', (e) => this.onMouseMove(e));
     this.canvas.nativeElement.removeEventListener('mouseup', (e) => this.onMouseUp());
-
     this.cursor.x = 9999;
     this.cursor.y = 9999;
   }
 
-  playAudio() {
 
-  }
 
   public prepareCanvas(color: string) {
     this.canvas.nativeElement.width = WIDTH_CANVAS;
@@ -123,16 +117,62 @@ export class FifteenthParticlesComponent implements OnInit, OnDestroy {
 
   private animate() {
 
+    this.counter++;
     this.prepareCanvas('black')
-
     this.particles.sort((a,b)=> a.scale - b.scale)
-
     this.particles.forEach(particle => {
       particle.update(this.cursor.x, this.cursor.y)
       particle.draw(this.ctx)
     })
 
-    this.animationID = window.requestAnimationFrame(() => this.animate());
+    this.animationID = window.requestAnimationFrame(() => this.animate())
+    // if(this.counter > 500){
+    //   window.cancelAnimationFrame(this.animationID)
+    // }
+
+  }
+
+  formatLabel(value: number) {
+    this.numCircles = value;
+    return value;
+  }
+
+  numCirclesOnChange(value: number) {
+    //clean data
+    this.cirRadius = 0;
+    this.particles =[]
+    if (this.numCircles !== value) {
+      this.numCircles = value;
+      this.createParticlesInCircles();
+    }
+  }
+
+  gapCirclesOnChange(value: number) {
+    //clean data
+    this.cirRadius = 0;
+    this.gapCircle = 0;
+    this.particles =[]
+    if (this.gapCircle !== value) {
+      this.gapCircle = value;
+      this.createParticlesInCircles();
+    }
+  }
+
+  dotRadiusOnChange(value: number){
+    //clean data
+    // this.cirRadius = 0;
+    // this.gapCircle = 0;
+    // this.radius = 0;
+    this.particles =[]
+    if (this.radius !== value) {
+      this.radius = value;
+      this.createParticlesInCircles();
+    }
+  }
+
+
+  ngOnDestroy(){
+    window.cancelAnimationFrame(this.animationID)
   }
 
 }

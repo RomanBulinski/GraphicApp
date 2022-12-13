@@ -14,9 +14,13 @@
     <name>GraphicApp</name>
     <description>GraphicApp</description>
 
+
+
     <properties>
         <java.version>11</java.version>
     </properties>
+
+    <packaging>war</packaging>
 
     <dependencies>
         <dependency>

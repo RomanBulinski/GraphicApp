@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {HEIGHT_CANVAS, WIDTH_CANVAS} from "../../objects/global-variabels";
 import {Utils} from "../../objects/utils";
 
@@ -7,7 +7,7 @@ import {Utils} from "../../objects/utils";
   templateUrl: './eleventh-sound.component.html',
   styleUrls: ['./eleventh-sound.component.scss']
 })
-export class EleventhSoundComponent implements OnInit {
+export class EleventhSoundComponent implements OnInit, OnDestroy {
 
   private ctx!: CanvasRenderingContext2D;
   @ViewChild('canvas', {static: true}) canvas!: ElementRef<HTMLCanvasElement>;
@@ -81,9 +81,11 @@ export class EleventhSoundComponent implements OnInit {
 
   createAudio() {
 
-    this.audio = new Audio();
-    this.audio.src = '../../../assets/mp3/mixkit.mp3'
-    // this.audio.src = '../../../assets/mp3/morphed.mp3'
+    this.audio = new Audio()
+    //TODO for prod
+    this.audio.src = 'assets/mp3/mixkit.mp3'
+    // this.audio.src = '../../../assets/mp3/mixkit.mp3'
+
     this.audioContext = new AudioContext();
 
     this.sourceNode = this.audioContext.createMediaElementSource(this.audio)
@@ -102,6 +104,11 @@ export class EleventhSoundComponent implements OnInit {
     this.audio.autoplay = true;
   }
 
+  stopAudio() {
+    this.audio.load();
+    this.audio.autoplay = false;
+  }
+
   getAverage(data: any) {
     let sum = 0;
     for (let i = 0; i < data.length; i++) {
@@ -116,6 +123,10 @@ export class EleventhSoundComponent implements OnInit {
     this.ctx = this.canvas.nativeElement.getContext('2d')!;
     this.ctx.fillStyle = color;
     this.ctx.fillRect(2, 2, WIDTH_CANVAS - 4, HEIGHT_CANVAS - 4);
+  }
+
+  ngOnDestroy(): void {
+    this.stopAudio();
   }
 
 }

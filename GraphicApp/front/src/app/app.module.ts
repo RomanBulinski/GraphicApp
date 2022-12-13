@@ -28,6 +28,9 @@ import { ThirteenthSoundCircle2Component } from './pages/thirteenth-sound-circle
 import { FourteenthComponent } from './pages/fourteenth/fourteenth.component';
 import { FifteenthParticlesComponent } from './pages/fifteenth-particles/fifteenth-particles.component';
 import { SixteenthPhotoComponent } from './pages/sixteenth-photo/sixteenth-photo.component';
+import {MatListModule} from "@angular/material/list";
+import {MatCardModule} from "@angular/material/card";
+import {ScrollingModule} from "@angular/cdk/scrolling";
 
 
 @NgModule({
@@ -52,17 +55,20 @@ import { SixteenthPhotoComponent } from './pages/sixteenth-photo/sixteenth-photo
     FifteenthParticlesComponent,
     SixteenthPhotoComponent,
   ],
-    imports: [
-        MatButtonModule,
-        MatSliderModule,
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        RandomcolorModule,
-        FlexLayoutModule,
-        FormsModule,
+  imports: [
+    MatButtonModule,
+    MatSliderModule,
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    RandomcolorModule,
+    FlexLayoutModule,
+    FormsModule,
+    MatListModule,
+    MatCardModule,
+    ScrollingModule,
 
-    ],
+  ],
   providers: [CanvasPreparer ],
   bootstrap: [AppComponent]
 })

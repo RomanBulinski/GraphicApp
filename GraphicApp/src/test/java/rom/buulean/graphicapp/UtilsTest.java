@@ -52,7 +52,7 @@ class UtilsTest {
     @Test
     void mapRange2g() {
         Utils u = new Utils();
-        int result = u.mapRange2(200,100,0, 10,0);
-        assertEquals(0, result);
+        int result = u.mapRange2(100,100,0, 11,0);
+        assertEquals(11, result);
     }
 }

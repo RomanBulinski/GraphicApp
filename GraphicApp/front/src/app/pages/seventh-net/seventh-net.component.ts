@@ -1,4 +1,4 @@
-import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {HEIGHT_CANVAS, WIDTH_CANVAS} from "../../objects/global-variabels";
 import {SimplePoint} from "../../objects/simplePoint";
 import SimplexNoise from 'simplex-noise';
@@ -11,7 +11,7 @@ import {Utils} from "../../objects/utils";
   templateUrl: './seventh-net.component.html',
   styleUrls: ['./seventh-net.component.scss']
 })
-export class SeventhNetComponent implements OnInit {
+export class SeventhNetComponent implements OnInit, OnDestroy {
 
   private ctx!: CanvasRenderingContext2D;
   @ViewChild('canvas', {static: true}) canvas!: ElementRef<HTMLCanvasElement>;
@@ -61,7 +61,6 @@ export class SeventhNetComponent implements OnInit {
     // })
 
     this.prepareCanvas('black');
-    window.cancelAnimationFrame(this.ref)
   }
 
   public animate() {
@@ -73,27 +72,11 @@ export class SeventhNetComponent implements OnInit {
       this.points[r * this.cols + this.cols - 1].y = this.points[r * this.cols].y
     }
     this.translateAndDraw();
-    this.ref = window.requestAnimationFrame(() => this.animate())
-  }
-
-  animationWithNgZone() {
-    this.ngZone.runOutsideAngular(() => {
-      const loop = () => {
-        this.prepareCanvas('black');
-        for (let r = 0; r < this.rows; r++) {
-          for (let c = 0; c < this.cols - 1; c++) {
-            this.points[r * this.cols + c + 0].y = this.points[r * this.cols + c + 1].y
-          }
-          this.points[r * this.cols + this.cols - 1].y = this.points[r * this.cols].y
-        }
-        this.translateAndDraw();
-        requestAnimationFrame(loop);
-      };
-      this.animationID = requestAnimationFrame(loop);
-    });
+    this.animationID = window.requestAnimationFrame(() => this.animate())
   }
 
   action() {
+    // window.cancelAnimationFrame(this.animationID)
     this.prepareCanvas('black');
     this.setParameters();
     this.points = this.setPointsInArray(this.RANDOM, this.FREQUENCY, this.AMPLITUDE);
@@ -237,6 +220,10 @@ export class SeventhNetComponent implements OnInit {
       this.lengthRatio = value;
       this.action()
     }
+  }
+
+  ngOnDestroy(){
+    window.cancelAnimationFrame(this.animationID)
   }
 
 }

@@ -1,17 +1,24 @@
-<div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="20px">
-  <canvas #canvas></canvas>
-  <button mat-raised-button (click)="loadImage()">Load</button>
-  <button mat-raised-button (click)="action()">Action</button>
-  <button mat-raised-button (click)="animate()">Animate</button>
+<div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
+  <div fxFlex="20"></div>
+  <div fxFlex="60">
+    <canvas #canvas></canvas>
+  </div>
+  <div fxFlex="20" fxLayout="column">
+    <button mat-raised-button (click)="loadImage()">Load</button>
+    <button mat-raised-button (click)="action()">Action</button>
+    <button mat-raised-button (click)="animate()">Animate</button>
+    <canvas #canvasDama></canvas>
+    <img id="dama"
+         src="assets/pictures/dama.png"
+         width="64" height="64">
+  </div>
 </div>
 
-<canvas #canvasDama></canvas>
-<img id="dama"
-     src="assets/pictures/dama.png"
-     width="64" height="64">
 
 <!--<canvas #canvasCircle></canvas>-->
 <!--<img id="circle"-->
 <!--     src="assets/pictures/circle.jpg"-->
 <!--     width="64" height="64">-->
+
+
 

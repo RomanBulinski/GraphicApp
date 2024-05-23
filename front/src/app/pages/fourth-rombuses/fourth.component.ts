@@ -2,6 +2,7 @@ import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
 import {Utils} from "../../objects/utils";
 import {Romb} from "../../objects/romb";
 import Rand, {PRNG} from 'rand-seed';
+import {HEIGHT_CANVAS, WIDTH_CANVAS} from "../../objects/global-variabels";
 
 @Component({
   selector: 'app-fourth',
@@ -10,8 +11,8 @@ import Rand, {PRNG} from 'rand-seed';
 })
 export class FourthComponent implements OnInit {
 
-  WIDTH_CANVAS = 540;
-  HEIGHT_CANVAS = 540;
+  WIDTH_CANVAS = WIDTH_CANVAS;
+  HEIGHT_CANVAS = HEIGHT_CANVAS;
   private ctx!: CanvasRenderingContext2D;
   @ViewChild('canvas', {static: true}) canvas!: ElementRef<HTMLCanvasElement>;
 

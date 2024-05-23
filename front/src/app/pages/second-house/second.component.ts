@@ -1,4 +1,5 @@
 import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
+import {HEIGHT_CANVAS, WIDTH_CANVAS} from "../../objects/global-variabels";
 
 @Component({
   selector: 'app-second',
@@ -7,8 +8,8 @@ import {Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
 })
 export class SecondComponent implements OnInit {
 
-  WIDTH = 540;
-  HEIGHT = 540;
+  WIDTH = WIDTH_CANVAS;
+  HEIGHT = HEIGHT_CANVAS;
   private ctx!: CanvasRenderingContext2D;
   @ViewChild('canvas', {static: true}) canvas!: ElementRef<HTMLCanvasElement>;
 

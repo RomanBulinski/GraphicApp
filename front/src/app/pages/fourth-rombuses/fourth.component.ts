@@ -120,7 +120,7 @@ export class FourthComponent implements OnInit {
   private drawSkewRect(ctx: CanvasRenderingContext2D,
                        xStart: number, yStart: number,
                        w: number, h: number,
-                       fill: string, stroke: string, blend: string) {
+                       fill: string, stroke: string, blend: any) {
 
     ctx.save()// save() na poczatku i restore() na koncu
 

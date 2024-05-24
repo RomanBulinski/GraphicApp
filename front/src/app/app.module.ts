@@ -11,7 +11,6 @@ import {SquareComponent} from "./objects/square/square.component";
 import {ElementComponent} from "./objects/element/element.component";
 import { ThirdComponent } from './pages/third-rectangle/third.component';
 import { FourthComponent } from './pages/fourth-rombuses/fourth.component';
-import { RandomcolorModule } from 'angular-randomcolor';
 import { FifthComponent } from './pages/fifth/fifth.component';
 import {CanvasPreparer} from "./objects/canvas-preparer";
 import { SixthArcComponent } from './pages/sixth-arc/sixth-arc.component';
@@ -61,7 +60,6 @@ import {ScrollingModule} from "@angular/cdk/scrolling";
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    RandomcolorModule,
     FlexLayoutModule,
     FormsModule,
     MatListModule,

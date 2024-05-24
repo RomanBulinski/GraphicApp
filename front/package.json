@@ -23,7 +23,6 @@
     "@angular/platform-browser-dynamic": "^16.2.12",
     "@angular/router": "^16.2.12",
     "@types/colormap": "^2.3.1",
-    "angular-randomcolor": "^1.0.3",
     "colormap": "^2.3.2",
     "eases": "^1.0.8",
     "rand-seed": "^1.0.1",

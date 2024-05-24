@@ -16,8 +16,8 @@ import { FifthComponent } from './pages/fifth/fifth.component';
 import {CanvasPreparer} from "./objects/canvas-preparer";
 import { SixthArcComponent } from './pages/sixth-arc/sixth-arc.component';
 import { SeventhNetComponent } from './pages/seventh-net/seventh-net.component';
-import { MatSliderModule } from '@angular/material/slider';
-import {MatButtonModule} from '@angular/material/button';
+import { MatLegacySliderModule as MatSliderModule } from '@angular/material/legacy-slider';
+import {MatLegacyButtonModule as MatButtonModule} from '@angular/material/legacy-button';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {FormsModule} from "@angular/forms";
 import { EighthFlowersComponent } from './pages/eighth-flowers/eighth-flowers.component';
@@ -28,8 +28,8 @@ import { ThirteenthSoundCircle2Component } from './pages/thirteenth-sound-circle
 import { FourteenthComponent } from './pages/fourteenth/fourteenth.component';
 import { FifteenthParticlesComponent } from './pages/fifteenth-particles/fifteenth-particles.component';
 import { SixteenthPhotoComponent } from './pages/sixteenth-photo/sixteenth-photo.component';
-import {MatListModule} from "@angular/material/list";
-import {MatCardModule} from "@angular/material/card";
+import {MatLegacyListModule as MatListModule} from "@angular/material/legacy-list";
+import {MatLegacyCardModule as MatCardModule} from "@angular/material/legacy-card";
 import {ScrollingModule} from "@angular/cdk/scrolling";
 
 
